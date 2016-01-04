@@ -7,3 +7,4 @@ typedef struct arrayUtil{
 ArrayUtil create(int typeSize, int length);
 ArrayUtil resize(ArrayUtil array, int length);
 int areEqual(ArrayUtil first, ArrayUtil second);
+void pushString(ArrayUtil array);

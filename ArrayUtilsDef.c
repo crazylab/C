@@ -30,3 +30,10 @@ int areEqual(ArrayUtil first, ArrayUtil second){
     }
     return 1;
 }
+
+void pushString(ArrayUtil array){
+    char *charecters = (char *)array.base;
+    int index;
+    for(index = 0; index < array.length; index++)
+        charecters[index] = 65 + index;
+}
