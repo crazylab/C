@@ -37,5 +37,6 @@ void test_areEqual() {
 int main(void) {
     test_int_create();
     test_resize();
+    test_areEqual();
     return 0;
 }
