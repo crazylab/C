@@ -17,3 +17,16 @@ ArrayUtil resize(ArrayUtil array, int length){
     array.length = length;
     return array;
 }
+
+int areEqual(ArrayUtil first, ArrayUtil second){
+    int index;
+    char *first_char = (char *)first.base;
+    char *second_char = (char *)second.base;
+    if(first.length != second.length || first.typeSize != second.typeSize)
+        return 0;
+    for(index = 0; index < first.length; index++){
+        if(first_char[index] != second_char[index])
+            return 0;
+    }
+    return 1;
+}

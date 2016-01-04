@@ -23,7 +23,17 @@ void test_resize() {
     array = resize(array, 12);
     assert(array.length == 12);
 }
+void test_areEqual() {
+    ArrayUtil array1, array2;
+    char *charecters;
+    array1 = create(1, 10);
+    array2 = create(1, 10);
 
+    assert(areEqual(array1, array2) == 1);
+    charecters = (char *)array1.base;
+    charecters[5] = 'a';
+    assert(areEqual(array1, array2) == 0);
+}
 int main(void) {
     test_int_create();
     test_resize();
