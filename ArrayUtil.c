@@ -1,7 +1,10 @@
+#include <stdio.h>
 #include <assert.h>
 #include "ArrayUtil.h"
 
-void test_int_create(){
+int passed_test = 0;
+
+void test_create(){
     ArrayUtil array;
     int *numbers;
     array = create(4, 10);
@@ -10,6 +13,9 @@ void test_int_create(){
 
     numbers = (int *)array.base;
     assert(numbers[0] == 0);
+
+    printf("test_create\tcreated array of given size\n");
+    passed_test++;
 }
 void test_resize() {
     ArrayUtil array;
@@ -22,6 +28,9 @@ void test_resize() {
 
     array = resize(array, 12);
     assert(array.length == 12);
+
+    printf("test_resize\tresized array to the given size\n");
+    passed_test++;
 }
 void test_areEqual() {
     ArrayUtil array1, array2;
@@ -33,10 +42,15 @@ void test_areEqual() {
     charecters = (char *)array1.base;
     charecters[5] = 'a';
     assert(areEqual(array1, array2) == 0);
+
+    printf("test_areEqual\tchecked whether 2 array's are same or not\n");
+    passed_test++;
 }
 int main(void) {
-    test_int_create();
+    test_create();
     test_resize();
     test_areEqual();
+
+    printf("\n%d tests are passed\n", passed_test);
     return 0;
 }
