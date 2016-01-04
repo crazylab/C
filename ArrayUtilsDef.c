@@ -10,3 +10,10 @@ ArrayUtil create(int typeSize, int length){
 
     return result_array;
 }
+
+ArrayUtil resize(ArrayUtil array, int length){
+    int size_needed = (length * array.typeSize);
+    array.base = realloc(array.base, size_needed);
+    array.length = length;
+    return array;
+}

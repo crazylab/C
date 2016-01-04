@@ -5,3 +5,4 @@ typedef struct arrayUtil{
 } ArrayUtil;
 
 ArrayUtil create(int typeSize, int length);
+ArrayUtil resize(ArrayUtil array, int length);
