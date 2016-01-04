@@ -30,6 +30,9 @@ int areEqual(ArrayUtil first, ArrayUtil second){
     }
     return 1;
 }
+void dispose(ArrayUtil array){
+    free(array.base);
+}
 
 void pushString(ArrayUtil array){
     char *charecters = (char *)array.base;

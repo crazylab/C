@@ -62,10 +62,20 @@ void test_areEqual() {
     printf("test_areEqual\tchecked whether 2 array's are same or not\n");
     passed_test++;
 }
+void test_dispose() {
+    ArrayUtil array;
+    array = create(1, 10);
+    dispose(array);
+
+    printf("test_dispose\tdisposed the allocated memory. *No assert is here*\n");
+    passed_test++;
+}
+
 int main(void) {
     test_create();
     test_resize();
     test_areEqual();
+    test_dispose();
 
     printf("\n%d tests are passed\n", passed_test);
     return 0;
