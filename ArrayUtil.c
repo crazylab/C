@@ -26,7 +26,7 @@ void test_resize() {
     assert(array.length == 5);
     assert(array.typeSize == 1);
 
-    pushString(array);
+    pushValue(array, 65);
     charecters = (char *)array.base;
     assert(strcmp(charecters, "ABCDE") == 0);
 
@@ -51,8 +51,8 @@ void test_areEqual() {
     array1 = create(1, 10);
     array2 = create(1, 10);
 
-    pushString(array1);
-    pushString(array2);
+    pushValue(array1, 65);
+    pushValue(array2, 65);
 
     assert(areEqual(array1, array2) == 1);
     charecters = (char *)array1.base;
@@ -70,12 +70,24 @@ void test_dispose() {
     printf("test_dispose\tdisposed the allocated memory. *No assert is here*\n");
     passed_test++;
 }
+void test_findIndex() {
+    ArrayUtil array;
+    int element = 259;
+    array = create(1, 8);
+    pushValue(array, 255);
+    assert(findIndex(array, &element) == 4);
+    element = 6000;
+    assert(findIndex(array, &element) == -1);
 
+    printf("test_findIndex\t finds the index of a number if present or gives -1\n");
+    passed_test++;
+}
 int main(void) {
     test_create();
     test_resize();
     test_areEqual();
     test_dispose();
+    test_findIndex();
 
     printf("\n%d tests are passed\n", passed_test);
     return 0;

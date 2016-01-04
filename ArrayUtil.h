@@ -8,4 +8,5 @@ ArrayUtil create(int typeSize, int length);
 ArrayUtil resize(ArrayUtil array, int length);
 int areEqual(ArrayUtil first, ArrayUtil second);
 void dispose(ArrayUtil array);
-void pushString(ArrayUtil array);
+int findIndex(ArrayUtil array, void *element);
+void pushValue(ArrayUtil array, int start);

@@ -30,13 +30,27 @@ int areEqual(ArrayUtil first, ArrayUtil second){
     }
     return 1;
 }
+
 void dispose(ArrayUtil array){
     free(array.base);
 }
 
-void pushString(ArrayUtil array){
+int findIndex(ArrayUtil array, void *element){
+    int index, inner_index;
+    char *byte_element = (char *)element;
+    char *array_element = (char *)array.base;
+
+    for(index = 0; index < array.length; index++){
+        for(inner_index = 0; inner_index < array.typeSize; inner_index++)
+            if(*(byte_element + inner_index) == *(array_element + index))
+                return index;
+    }
+    return -1;
+}
+
+void pushValue(ArrayUtil array, int start){
     char *charecters = (char *)array.base;
     int index;
     for(index = 0; index < array.length; index++)
-        charecters[index] = 65 + index;
+        charecters[index] = start + index;
 }
