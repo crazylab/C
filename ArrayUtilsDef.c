@@ -48,7 +48,7 @@ void * findFirst(ArrayUtil array, MatchFunc match, void* hint){
     int index;
     int *items = array.base;
     for(index = 0; index < array.length; index++){
-        if(match(hint, &items[index]) == 1){
+        if(match(hint, &items[index])){
             return &items[index];
         }
     }
@@ -59,11 +59,21 @@ void * findLast(ArrayUtil array, MatchFunc match, void* hint){
     int index;
     int *items = array.base;
     for(index = array.length - 1; index != 0; index--){
-        if(match(hint, &items[index]) == 1){
+        if(match(hint, &items[index])){
             return &items[index];
         }
     }
     return NULL;
+}
+
+int count(ArrayUtil array, MatchFunc *match, void *hint){
+    int index, count = 0;
+    int *items = array.base;
+    for(index = 0; index < array.length; index++){
+        if(match(hint, &items[index]))
+            count++;
+    }
+    return count;
 }
 
 void pushValue(ArrayUtil array, int start){

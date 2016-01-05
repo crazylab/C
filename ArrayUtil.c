@@ -137,6 +137,25 @@ void test_findLast(){
     passed_test++;
 }
 
+void test_count(){
+    ArrayUtil array = create(4,5);
+    int *numbers = (int *)(array.base);
+
+    numbers[0] = 1;
+    numbers[1] = 3;
+    numbers[2] = 6;
+    numbers[3] = 8;
+    numbers[4] = 5;
+
+    void * hint = NULL;
+    assert(count(array, &isEven, hint) == 2);
+
+    hint = (void *)&numbers[0];
+    assert(count(array, &isDivisible, hint) == 5);
+
+    printf("test_findLast\t number of matched criteria\n");
+    passed_test++;
+}
 int main(void) {
     test_create();
     test_resize();
@@ -145,6 +164,7 @@ int main(void) {
     test_findIndex();
     test_findFirst();
     test_findLast();
+    test_count();
 
     printf("\n%d tests are passed\n", passed_test);
     return 0;

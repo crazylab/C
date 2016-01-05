@@ -13,4 +13,6 @@ void dispose(ArrayUtil array);
 int findIndex(ArrayUtil array, void *element);
 void * findFirst(ArrayUtil array, MatchFunc *match, void *hint);
 void * findLast(ArrayUtil array, MatchFunc *match, void *hint);
+int count(ArrayUtil array, MatchFunc *match, void *hint);
+
 void pushValue(ArrayUtil array, int start);
