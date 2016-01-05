@@ -44,6 +44,17 @@ int findIndex(ArrayUtil array, void *element){
     return -1;
 }
 
+void * findFirst(ArrayUtil array, MatchFunc match, void* hint){
+    int index;
+    int *items = array.base;
+    for(index = 0; index < array.length; index++){
+        if(match(NULL, &items[index])){
+            return &items[index];
+        }
+    }
+    return NULL;
+}
+
 void pushValue(ArrayUtil array, int start){
     char *charecters = (char *)array.base;
     int index;

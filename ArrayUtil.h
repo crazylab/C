@@ -1,3 +1,5 @@
+typedef int (MatchFunc)(void *, void *);
+
 typedef struct arrayUtil{
     void *base;
     int typeSize;
@@ -9,4 +11,5 @@ ArrayUtil resize(ArrayUtil array, int length);
 int areEqual(ArrayUtil first, ArrayUtil second);
 void dispose(ArrayUtil array);
 int findIndex(ArrayUtil array, void *element);
+void * findFirst(ArrayUtil array, MatchFunc *match, void *hint);
 void pushValue(ArrayUtil array, int start);

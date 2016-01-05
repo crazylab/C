@@ -82,12 +82,34 @@ void test_findIndex() {
     printf("test_findIndex\t finds the index of a number if present or gives -1\n");
     passed_test++;
 }
+
+int isEven(void *hint, void *item){
+    int *number = (int *)item;
+    return !(*number % 2);
+}
+// int isDivisible(void* hint, void* item){
+//
+// }
+
+void test_findFirst(){
+    ArrayUtil array;
+    void *result;
+    array = create(4, 5);
+    void *hint = NULL;
+    pushValue(array, 10);
+    result = findFirst(array, &isEven, hint);
+    assert(memcmp(result, array.base, 4) == 0);
+
+    printf("test_findFirst\t finds the first element which matches the criteria\n");
+    passed_test++;
+}
 int main(void) {
     test_create();
     test_resize();
     test_areEqual();
     test_dispose();
     test_findIndex();
+    test_findFirst();
 
     printf("\n%d tests are passed\n", passed_test);
     return 0;
