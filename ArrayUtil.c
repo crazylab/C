@@ -114,6 +114,29 @@ void test_findFirst(){
     printf("test_findFirst\t finds the first element which matches the criteria\n");
     passed_test++;
 }
+
+void test_findLast(){
+    ArrayUtil array = create(4,5);
+    int *numbers = (int *)(array.base);
+
+    numbers[0] = 1;
+    numbers[1] = 3;
+    numbers[2] = 6;
+    numbers[3] = 8;
+    numbers[4] = 5;
+
+    void * hint = NULL;
+    int * result = (int *)findLast(array, &isEven, hint);
+    assert(*result == 8);
+
+    hint = (void *)&numbers[1];
+    result = (int *)findLast(array, &isDivisible, hint);
+    assert(*result == 6);
+
+    printf("test_findLast\t finds the last element which matches the criteria\n");
+    passed_test++;
+}
+
 int main(void) {
     test_create();
     test_resize();
@@ -121,6 +144,7 @@ int main(void) {
     test_dispose();
     test_findIndex();
     test_findFirst();
+    test_findLast();
 
     printf("\n%d tests are passed\n", passed_test);
     return 0;

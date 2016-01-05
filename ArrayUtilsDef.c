@@ -55,6 +55,17 @@ void * findFirst(ArrayUtil array, MatchFunc match, void* hint){
     return NULL;
 }
 
+void * findLast(ArrayUtil array, MatchFunc match, void* hint){
+    int index;
+    int *items = array.base;
+    for(index = array.length - 1; index != 0; index--){
+        if(match(hint, &items[index]) == 1){
+            return &items[index];
+        }
+    }
+    return NULL;
+}
+
 void pushValue(ArrayUtil array, int start){
     char *charecters = (char *)array.base;
     int index;
