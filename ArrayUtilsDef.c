@@ -1,5 +1,6 @@
 #include "ArrayUtil.h"
 #include "stdlib.h"
+#include <string.h>
 
 ArrayUtil create(int typeSize, int length){
     ArrayUtil result_array;
@@ -37,13 +38,12 @@ void dispose(ArrayUtil array){
 
 int findIndex(ArrayUtil array, void *element){
     int index, inner_index;
-    char *byte_element = (char *)element;
     char *array_element = (char *)array.base;
 
     for(index = 0; index < array.length; index++){
-        for(inner_index = 0; inner_index < array.typeSize; inner_index++)
-            if(*(byte_element + inner_index) == *(array_element + index))
-                return index;
+        if(memcmp(array.base, element, array.typeSize) == 0)
+            return index;
+        array.base += array.typeSize;
     }
     return -1;
 }
