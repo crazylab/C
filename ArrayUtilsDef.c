@@ -1,7 +1,7 @@
 #include "ArrayUtil.h"
 #include "stdlib.h"
 #include <string.h>
-
+#include <stdio.h>
 ArrayUtil create(int typeSize, int length){
     ArrayUtil result_array;
 
@@ -48,7 +48,7 @@ void * findFirst(ArrayUtil array, MatchFunc match, void* hint){
     int index;
     int *items = array.base;
     for(index = 0; index < array.length; index++){
-        if(match(NULL, &items[index])){
+        if(match(hint, &items[index]) == 1){
             return &items[index];
         }
     }

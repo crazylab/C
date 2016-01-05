@@ -87,18 +87,29 @@ int isEven(void *hint, void *item){
     int *number = (int *)item;
     return !(*number % 2);
 }
-// int isDivisible(void* hint, void* item){
-//
-// }
+int isDivisible(void* hint, void* item){
+    int *numerator = (int *)item;
+    int *denomenator = (int *)hint;
+    return !(*numerator % *denomenator);
+}
 
 void test_findFirst(){
-    ArrayUtil array;
-    void *result;
-    array = create(4, 5);
-    void *hint = NULL;
-    pushValue(array, 10);
-    result = findFirst(array, &isEven, hint);
-    assert(memcmp(result, array.base, 4) == 0);
+    ArrayUtil array = create(4,5);
+    int *numbers = (int *)(array.base);
+
+    numbers[0] = 1;
+    numbers[1] = 3;
+    numbers[2] = 6;
+    numbers[3] = 8;
+    numbers[4] = 5;
+
+    void * hint = NULL;
+    int * result = (int *)findFirst(array, &isEven, hint);
+    assert(*result == 6);
+
+    hint = (void *)&numbers[1];
+    result = (int *)findFirst(array, &isDivisible, hint);
+    assert(*result == 3);
 
     printf("test_findFirst\t finds the first element which matches the criteria\n");
     passed_test++;
