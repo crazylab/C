@@ -159,8 +159,8 @@ void test_count(){
 void test_filter(){
     ArrayUtil array = create(4,5);
     int *numbers = (int *)(array.base);
-    int destination[5];
-    void *dest_ptr = &destination;
+    ArrayUtil destination = create(4,5);
+    void *dest_ptr = destination.base;
     numbers[0] = 1;
     numbers[1] = 3;
     numbers[2] = 6;
