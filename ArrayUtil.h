@@ -1,4 +1,5 @@
 typedef int (MatchFunc)(void *, void *);
+typedef void (ConvertFunc)(void *, void *, void *);
 
 typedef struct arrayUtil{
     void *base;
@@ -15,5 +16,6 @@ void * findFirst(ArrayUtil array, MatchFunc *match, void *hint);
 void * findLast(ArrayUtil array, MatchFunc *match, void *hint);
 int count(ArrayUtil array, MatchFunc *match, void *hint);
 int filter(ArrayUtil array, MatchFunc* match, void* hint, void** destination, int maxItems);
+void map(ArrayUtil source, ArrayUtil destination, ConvertFunc* convert, void* hint);
 
 void pushValue(ArrayUtil array, int start);

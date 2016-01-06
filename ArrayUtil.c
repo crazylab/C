@@ -179,6 +179,37 @@ void test_filter(){
     passed_test++;
 }
 
+void multiply(void* hint, void* sourceItem, void *destinationItem){
+    int *multiplier = (int *)hint;
+    int *multiplicant = (int *)sourceItem;
+    int *dest_data = (int *)destinationItem;
+    int result = (*multiplicant) * (*multiplier);
+    *dest_data = result;
+}
+void test_map(){
+    ArrayUtil array = create(4,5);
+    int *source_numbers = (int *)(array.base);
+    source_numbers[0] = 1;
+    source_numbers[1] = 2;
+    source_numbers[2] = 6;
+    source_numbers[3] = 8;
+    source_numbers[4] = 5;
+
+    ArrayUtil destination = create(4,5);
+    void * hint = (void *)&source_numbers[1];
+    map(array, destination, &multiply, hint);
+
+    int *dest_numbers = (int *)(destination.base);
+    assert(2 == dest_numbers[0]);
+    assert(4 == dest_numbers[1]);
+    assert(12 == dest_numbers[2]);
+    assert(16 == dest_numbers[3]);
+    assert(10 == dest_numbers[4]);
+
+    printf("test_map\t gives an array after converting each element\n");
+    passed_test++;
+}
+
 int main(void) {
     test_create();
     test_resize();
@@ -189,6 +220,7 @@ int main(void) {
     test_findLast();
     test_count();
     test_filter();
+    test_map();
 
     printf("\n%d tests are passed\n", passed_test);
     return 0;

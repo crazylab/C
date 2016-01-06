@@ -91,6 +91,18 @@ int filter(ArrayUtil array, MatchFunc* match, void* hint, void** destination, in
     return count;
 }
 
+void map(ArrayUtil source, ArrayUtil destination, ConvertFunc* convert, void* hint){
+    void *sourceItem = source.base;
+    void *end = source.base + (source.length * source.typeSize);
+    void *destinationItem = destination.base;
+
+    for( ; sourceItem != end; ){
+        convert(hint, sourceItem, destinationItem);
+        sourceItem += source.typeSize;
+        destinationItem += source.typeSize;
+    }
+};
+
 void pushValue(ArrayUtil array, int start){
     char *charecters = (char *)array.base;
     int index;
