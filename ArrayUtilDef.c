@@ -1,7 +1,7 @@
 #include "ArrayUtil.h"
 #include "stdlib.h"
 #include <string.h>
-#include <stdio.h>
+
 ArrayUtil create(int typeSize, int length){
     ArrayUtil result_array;
 
@@ -45,43 +45,48 @@ int findIndex(ArrayUtil array, void *element){
 }
 
 void * findFirst(ArrayUtil array, MatchFunc match, void* hint){
-    int index;
-    int *items = array.base;
-    for(index = 0; index < array.length; index++){
-        if(match(hint, &items[index]))
-            return &items[index];
+    void *item = array.base;
+    void *end = array.base + (array.length * array.typeSize);
+    for( ; item != end; ){
+        if(match(hint, item))
+            return item;
+        item += array.typeSize;
     }
     return NULL;
 }
 
 void * findLast(ArrayUtil array, MatchFunc match, void* hint){
-    int index;
-    int *items = array.base;
-    for(index = array.length - 1; index != 0; index--){
-        if(match(hint, &items[index]))
-            return &items[index];
+    void *item = array.base + (array.length * array.typeSize);
+    for( ; item != array.base; ){
+        item -= array.typeSize;
+        if(match(hint, item))
+            return item;
     }
     return NULL;
 }
 
 int count(ArrayUtil array, MatchFunc *match, void *hint){
-    int index, count = 0;
-    int *items = array.base;
-    for(index = 0; index < array.length; index++){
-        if(match(hint, &items[index]))
+    int count = 0;
+    void *item = array.base;
+    void *end = array.base + (array.length * array.typeSize);
+    for( ; item != end; ){
+        if(match(hint, item))
             count++;
+        item += array.typeSize;
     }
     return count;
 }
 int filter(ArrayUtil array, MatchFunc* match, void* hint, void** destination, int maxItems){
     int index, count = 0;
-    int *items = array.base;
+    void *item = array.base;
+    void *end = array.base + (array.length * array.typeSize);
 
-    for(index = 0; index < array.length; index++){
-        if(match(hint, &items[index]) && count < maxItems){
-            destination[count] = &items[index];
+    for( ; item != end; ){
+        if(match(hint, item) && count < maxItems){
+            destination[count] = item;
             count++;
         }
+        item += array.typeSize;
     }
     return count;
 }
