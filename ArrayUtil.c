@@ -172,8 +172,8 @@ void test_filter(){
     assert(count == 2);
 
     int *dest = (int *)dest_ptr;
-    assert(*dest == 6);
-    assert(*(dest+1) == 8);
+    assert(dest[0] == 6);
+    assert(dest[1] == 8);
 
     printf("test_filter\t gives an array of pointers which are matched\n");
     passed_test++;
