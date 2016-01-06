@@ -156,6 +156,29 @@ void test_count(){
     printf("test_findLast\t number of matched criteria\n");
     passed_test++;
 }
+void test_filter(){
+    ArrayUtil array = create(4,5);
+    int *numbers = (int *)(array.base);
+    int destination[5];
+    void *dest_ptr = &destination;
+    numbers[0] = 1;
+    numbers[1] = 3;
+    numbers[2] = 6;
+    numbers[3] = 8;
+    numbers[4] = 5;
+
+    void * hint = NULL;
+    int count = filter(array, &isEven, hint, &dest_ptr, 5);
+    assert(count == 2);
+
+    int *dest = (int *)dest_ptr;
+    assert(*dest == 6);
+    assert(*(dest+1) == 8);
+
+    printf("test_filter\t gives an array of pointers which are matched\n");
+    passed_test++;
+}
+
 int main(void) {
     test_create();
     test_resize();
@@ -165,6 +188,7 @@ int main(void) {
     test_findFirst();
     test_findLast();
     test_count();
+    test_filter();
 
     printf("\n%d tests are passed\n", passed_test);
     return 0;

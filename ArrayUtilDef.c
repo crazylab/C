@@ -48,9 +48,8 @@ void * findFirst(ArrayUtil array, MatchFunc match, void* hint){
     int index;
     int *items = array.base;
     for(index = 0; index < array.length; index++){
-        if(match(hint, &items[index])){
+        if(match(hint, &items[index]))
             return &items[index];
-        }
     }
     return NULL;
 }
@@ -59,9 +58,8 @@ void * findLast(ArrayUtil array, MatchFunc match, void* hint){
     int index;
     int *items = array.base;
     for(index = array.length - 1; index != 0; index--){
-        if(match(hint, &items[index])){
+        if(match(hint, &items[index]))
             return &items[index];
-        }
     }
     return NULL;
 }
@@ -72,6 +70,18 @@ int count(ArrayUtil array, MatchFunc *match, void *hint){
     for(index = 0; index < array.length; index++){
         if(match(hint, &items[index]))
             count++;
+    }
+    return count;
+}
+int filter(ArrayUtil array, MatchFunc* match, void* hint, void** destination, int maxItems){
+    int index, count = 0;
+    int *items = array.base;
+
+    for(index = 0; index < array.length; index++){
+        if(match(hint, &items[index])){
+            destination[count] = &items[index];
+            count++;
+        }
     }
     return count;
 }
