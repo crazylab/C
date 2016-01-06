@@ -210,6 +210,34 @@ void test_map(){
     passed_test++;
 }
 
+void add_number(void* hint, void* item){
+    float *hint_ptr = (float *)hint;
+    float *item_ptr = (float *)item;
+    *item_ptr += *hint_ptr;
+}
+
+void test_forEach(){
+    ArrayUtil array = create(4, 5);
+    float *source_numbers = (float *)(array.base);
+    source_numbers[0] = 1;
+    source_numbers[1] = 2;
+    source_numbers[2] = 6;
+    source_numbers[3] = 8;
+    source_numbers[4] = 5;
+
+    float hint = 5;
+    forEach(array, &add_number, &hint);
+
+    assert(6 == source_numbers[0]);
+    assert(7 == source_numbers[1]);
+    assert(11 == source_numbers[2]);
+    assert(13 == source_numbers[3]);
+    assert(10 == source_numbers[4]);
+
+    printf("test_forEach\t does operation over each element\n");
+    passed_test++;
+}
+
 int main(void) {
     test_create();
     test_resize();
@@ -221,6 +249,7 @@ int main(void) {
     test_count();
     test_filter();
     test_map();
+    test_forEach();
 
     printf("\n%d tests are passed\n", passed_test);
     return 0;

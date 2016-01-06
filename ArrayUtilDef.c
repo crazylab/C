@@ -1,7 +1,7 @@
 #include "ArrayUtil.h"
 #include "stdlib.h"
 #include <string.h>
-
+#include <stdio.h>
 ArrayUtil create(int typeSize, int length){
     ArrayUtil result_array;
 
@@ -102,6 +102,16 @@ void map(ArrayUtil source, ArrayUtil destination, ConvertFunc* convert, void* hi
         destinationItem += source.typeSize;
     }
 };
+
+void forEach(ArrayUtil source, OperationFunc* doOperation, void* hint){
+    void *sourceItem = source.base;
+    void *end = source.base + (source.length * source.typeSize);
+
+    for( ; sourceItem != end; ){
+        doOperation(hint, sourceItem);
+        sourceItem += source.typeSize;
+    }
+}
 
 void pushValue(ArrayUtil array, int start){
     char *charecters = (char *)array.base;
