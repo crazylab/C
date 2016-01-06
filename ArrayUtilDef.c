@@ -78,7 +78,7 @@ int filter(ArrayUtil array, MatchFunc* match, void* hint, void** destination, in
     int *items = array.base;
 
     for(index = 0; index < array.length; index++){
-        if(match(hint, &items[index])){
+        if(match(hint, &items[index]) && count < maxItems){
             destination[count] = &items[index];
             count++;
         }
