@@ -113,6 +113,18 @@ void forEach(ArrayUtil source, OperationFunc* doOperation, void* hint){
     }
 }
 
+void* reduce(ArrayUtil array, ReducerFunc* reducer, void* hint, void* initialValue){
+    void *previousItem = initialValue;
+    void *currentItem = array.base;
+    void *end = array.base + (array.length * array.typeSize);
+
+    for( ; currentItem != end; ){
+        previousItem = reducer(hint, previousItem, currentItem);
+        currentItem += array.typeSize;
+    }
+    return previousItem;
+}
+
 void pushValue(ArrayUtil array, int start){
     char *charecters = (char *)array.base;
     int index;

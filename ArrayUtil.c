@@ -238,6 +238,31 @@ void test_forEach(){
     passed_test++;
 }
 
+void* find_sum(void* hint, void* previousItem, void* item){
+    int *item_ptr = (int *)item;
+    int *previousItem_ptr = (int *)previousItem;
+    *previousItem_ptr = (*previousItem_ptr) + (*item_ptr);
+    return previousItem;
+}
+void test_reduce(){
+    ArrayUtil array = create(4, 5);
+    int *source_numbers = (int *)(array.base);
+    source_numbers[0] = 1;
+    source_numbers[1] = 2;
+    source_numbers[2] = 6;
+    source_numbers[3] = 8;
+    source_numbers[4] = 5;
+
+    int hint = 5;
+    int initial = 0;
+    int *sum = (int *)reduce(array, &find_sum, &hint, &initial);
+
+    assert(22 == *sum);
+
+    printf("test_reduce\t finds result from a given array\n");
+    passed_test++;
+}
+
 int main(void) {
     test_create();
     test_resize();
@@ -250,6 +275,7 @@ int main(void) {
     test_filter();
     test_map();
     test_forEach();
+    test_reduce();
 
     printf("\n%d tests are passed\n", passed_test);
     return 0;
