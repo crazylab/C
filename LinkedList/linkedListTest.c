@@ -23,11 +23,19 @@ void test_add_to_list(){
     int number = 50;
     list = createList();
     int length = add_to_list(&list, &number);
-    result = (Node *)list.first;
+
     assert(1 == length);
     assert(1 == list.length);
+
+    result = (Node *)list.first;
     assert(&number == result -> element);
+    assert(NULL == result -> previous);
+    assert(NULL == result -> next);
+
+    result = (Node *)list.last;
     assert(&number == result -> element);
+    assert(NULL == result -> previous);
+    assert(NULL == result -> next);
 
     printf("test_add_to_list\tadds element in the LinkedList\n");
     passed_test++;
