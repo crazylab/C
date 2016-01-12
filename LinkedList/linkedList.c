@@ -24,8 +24,13 @@ int add_to_list(LinkedList *list, void *element){
     if(0 == list -> length){
         list -> first = node;
         list -> last = node;
-        node -> element = element;
     }
+    else{
+        node -> previous = list -> last;
+        list -> last -> next = node;
+        list -> last = node;
+    }
+    node -> element = element;
     list -> length++;
     return list -> length;
 }
