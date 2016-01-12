@@ -71,3 +71,19 @@ int indexOf(LinkedList list, void *element){
     }
     return -1;
 }
+
+void * deleteElementAt(LinkedList *list, int position){
+    int index;
+    void *deleted_element;
+    Node *node = list -> first;
+    for(index = 0; index < position; index++){
+        node = node -> next;
+    }
+    deleted_element = node -> element;
+    Node *previous_node = (Node *)node -> previous;
+    Node *next_node = (Node *)node -> next;
+    next_node -> previous = node -> previous;
+    previous_node -> next = node -> next;
+    free(node);
+    return deleted_element;
+}

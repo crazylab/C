@@ -138,8 +138,25 @@ void test_indexOf(){
     assert(5 == list.length);
     assert(indexOf(list, &number3) == 2);
     assert(indexOf(list, &number) == -1);
-    
+
     printf("test_indexOf\t\tgives the first index at which this element occurs in a list.\n");
+    passed_test++;
+}
+
+void test_deleteElementAt(){
+    LinkedList list;
+    int number1 = 50, number2 = 100, number3 = 150, number4 = 200, number5 = 250, number = 0;
+    list = createList();
+    add_to_list(&list, &number1);
+    add_to_list(&list, &number2);
+    add_to_list(&list, &number3);
+    add_to_list(&list, &number4);
+    add_to_list(&list, &number5);
+
+    assert(5 == list.length);
+    assert(deleteElementAt(&list, 3) == &number4);
+
+    printf("test_deleteElementAt\tdeletes the element at that list. Returns the data referenced by the node at that position.\n");
     passed_test++;
 }
 
@@ -151,6 +168,7 @@ int main(){
     test_forEach();
     test_getElementAt();
     test_indexOf();
+    test_deleteElementAt();
 
     return 0;
 }
