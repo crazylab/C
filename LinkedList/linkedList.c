@@ -34,17 +34,29 @@ int add_to_list(LinkedList *list, void *element){
     list -> length++;
     return list -> length;
 }
+
 void *get_first_element(LinkedList list){
     return list.first -> element;
 }
+
 void *get_last_element(LinkedList list){
     return list.last -> element;
 }
+
 void forEach(LinkedList *list, ElementProcessor e){
-    int index = 0;
+    int index;
     Node *node = list -> first;
     for(index = 0; index < list -> length; index++){
         e(node -> element);
         node = node -> next;
     }
+}
+
+void * getElementAt(LinkedList list, int position){
+    int index;
+    Node *node = list.first;
+    for(index = 1; index < position; index++){
+        node = node -> next;
+    }
+    return node -> element;
 }

@@ -103,7 +103,25 @@ void test_forEach(){
     assert(51 == *first_element);
     assert(251 == *last_element);
 
-    printf("test_forEach\toperates over each element in the list\n");
+    printf("test_forEach\t\toperates over each element in the list\n");
+    passed_test++;
+}
+
+void test_getElementAt(){
+    LinkedList list;
+    int number1 = 50, number2 = 100, number3 = 150, number4 = 200, number5 = 250;
+    list = createList();
+    add_to_list(&list, &number1);
+    add_to_list(&list, &number2);
+    add_to_list(&list, &number3);
+    add_to_list(&list, &number4);
+    add_to_list(&list, &number5);
+
+    assert(5 == list.length);
+    void *element = getElementAt(list, 3);
+    assert(&number3 == element);
+
+    printf("test_getElementAt\tgives the element reference at the specified position\n");
     passed_test++;
 }
 
@@ -113,6 +131,7 @@ int main(){
     test_get_first_element();
     test_get_last_element();
     test_forEach();
+    test_getElementAt();
 
     return 0;
 }
