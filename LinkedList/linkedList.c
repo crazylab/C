@@ -60,3 +60,14 @@ void * getElementAt(LinkedList list, int position){
     }
     return node -> element;
 }
+
+int indexOf(LinkedList list, void *element){
+    int index;
+    Node *node = list.first;
+    for(index = 0; index < list.length; index++){
+        if(node -> element == element)
+            return index;
+        node = node -> next;
+    }
+    return -1;
+}

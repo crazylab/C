@@ -17,3 +17,4 @@ void *get_first_element(LinkedList list);
 void *get_last_element(LinkedList list);
 void forEach(LinkedList *, ElementProcessor e);
 void * getElementAt(LinkedList, int );
+int indexOf(LinkedList, void *);
