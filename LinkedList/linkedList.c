@@ -55,7 +55,7 @@ void forEach(LinkedList *list, ElementProcessor e){
 void * getElementAt(LinkedList list, int position){
     int index;
     Node *node = list.first;
-    for(index = 1; index < position; index++){
+    for(index = 0; index < position; index++){
         node = node -> next;
     }
     return node -> element;

@@ -119,7 +119,7 @@ void test_getElementAt(){
 
     assert(5 == list.length);
     void *element = getElementAt(list, 3);
-    assert(&number3 == element);
+    assert(&number4 == element);
 
     printf("test_getElementAt\tgives the element reference at the specified position\n");
     passed_test++;
