@@ -37,3 +37,6 @@ int add_to_list(LinkedList *list, void *element){
 void *get_first_element(LinkedList list){
     return list.first -> element;
 }
+void *get_last_element(LinkedList list){
+    return list.last -> element;
+}

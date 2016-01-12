@@ -65,10 +65,25 @@ void test_get_first_element(){
     passed_test++;
 }
 
+void test_get_last_element(){
+    LinkedList list;
+    int number1 = 50, number2 = 100;
+    list = createList();
+    add_to_list(&list, &number1);
+    add_to_list(&list, &number2);
+    assert(2 == list.length);
+
+    void *element = get_last_element(list);
+    assert(&number2 == element);
+
+    printf("test_get_last_element\tgives the last element address in the list\n");
+    passed_test++;
+}
 int main(){
     test_createList();
     test_add_to_list();
     test_get_first_element();
+    test_get_last_element();
 
     return 0;
 }
