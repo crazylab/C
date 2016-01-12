@@ -79,11 +79,40 @@ void test_get_last_element(){
     printf("test_get_last_element\tgives the last element address in the list\n");
     passed_test++;
 }
+
+void increment(void *value) {
+    int *number = (int *)value;
+    *number += 1;
+}
+void test_forEach(){
+    LinkedList list;
+    int number1 = 50, number2 = 100, number3 = 150, number4 = 200, number5 = 250;
+    list = createList();
+    add_to_list(&list, &number1);
+    add_to_list(&list, &number2);
+    add_to_list(&list, &number3);
+    add_to_list(&list, &number4);
+    add_to_list(&list, &number5);
+
+    assert(5 == list.length);
+
+    forEach(&list, &increment);
+    int *first_element = (int *)get_first_element(list);
+    int *last_element = (int *)get_last_element(list);
+
+    assert(51 == *first_element);
+    assert(251 == *last_element);
+
+    printf("test_forEach\toperates over each element in the list\n");
+    passed_test++;
+}
+
 int main(){
     test_createList();
     test_add_to_list();
     test_get_first_element();
     test_get_last_element();
+    test_forEach();
 
     return 0;
 }

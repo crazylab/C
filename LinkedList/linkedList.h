@@ -1,4 +1,4 @@
-
+typedef void (*ElementProcessor)(void *);
 typedef struct node{
     void *element;
     void *previous;
@@ -15,3 +15,4 @@ LinkedList createList(void);
 int add_to_list(LinkedList *, void *);
 void *get_first_element(LinkedList list);
 void *get_last_element(LinkedList list);
+void forEach(LinkedList *, ElementProcessor e);
