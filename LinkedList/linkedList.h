@@ -4,6 +4,7 @@ typedef struct node{
     void *previous;
     void *next;
 }Node;
+
 typedef struct linkedList{
     Node *first;
     Node *last;
@@ -12,3 +13,4 @@ typedef struct linkedList{
 
 LinkedList createList(void);
 int add_to_list(LinkedList *, void *);
+void *get_first_element(LinkedList list);

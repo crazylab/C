@@ -19,7 +19,6 @@ void test_createList(){
 
 void test_add_to_list(){
     LinkedList list;
-    Node *result;
     int number1 = 50, number2 = 100;
     list = createList();
     int length = add_to_list(&list, &number1);
@@ -50,9 +49,26 @@ void test_add_to_list(){
     printf("test_add_to_list\tadds element in the LinkedList\n");
     passed_test++;
 }
+
+void test_get_first_element(){
+    LinkedList list;
+    int number1 = 50, number2 = 100;
+    list = createList();
+    add_to_list(&list, &number1);
+    add_to_list(&list, &number2);
+    assert(2 == list.length);
+
+    void *element = get_first_element(list);
+    assert(&number1 == element);
+
+    printf("test_get_first_element\tgives the first element address in the list\n");
+    passed_test++;
+}
+
 int main(){
     test_createList();
     test_add_to_list();
+    test_get_first_element();
 
     return 0;
 }
