@@ -187,6 +187,33 @@ void test_asArray(){
     passed_test++;
 }
 
+int divisible_by(void* hint, void* item){
+    int *numerator = (int *)item;
+    int *denomenator = (int *)hint;
+    return !(*numerator % *denomenator);
+};
+
+void test_filter(){
+    LinkedList list, result;
+    int number1 = 50, number2 = 100, number3 = 150, number4 = 200, number5 = 250, number = 0;
+    list = createList();
+    add_to_list(&list, &number1);
+    add_to_list(&list, &number2);
+    add_to_list(&list, &number3);
+    add_to_list(&list, &number4);
+    add_to_list(&list, &number5);
+
+    assert(5 == list.length);
+    int hint = 100;
+    result = filter(list, &divisible_by, &hint);
+    assert(2 == result.length);
+    assert(&number2 == result.first -> element);
+    assert(&number4 == result.last -> element);
+
+    printf("test_filter\t\t filteres element from the list\n");
+    passed_test++;
+}
+
 int main(){
     test_createList();
     test_add_to_list();
@@ -197,6 +224,6 @@ int main(){
     test_indexOf();
     test_deleteElementAt();
     test_asArray();
-
+    test_filter();
     return 0;
 }

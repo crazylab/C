@@ -1,4 +1,6 @@
 typedef void (*ElementProcessor)(void *);
+typedef int (MatchFunc)(void *, void *);
+
 typedef struct node{
     void *element;
     void *previous;
@@ -20,3 +22,4 @@ void * getElementAt(LinkedList, int );
 int indexOf(LinkedList, void *);
 void * deleteElementAt(LinkedList *, int);
 int asArray(LinkedList, void **, int maxElements);
+LinkedList filter(LinkedList, MatchFunc, void * );
