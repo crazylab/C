@@ -210,7 +210,31 @@ void test_filter(){
     assert(&number2 == result.first -> element);
     assert(&number4 == result.last -> element);
 
-    printf("test_filter\t\t filteres element from the list\n");
+    printf("test_filter\t\tfilteres element from the list\n");
+    passed_test++;
+}
+
+void test_reverse(){
+    LinkedList list, result;
+    int number1 = 50, number2 = 100, number3 = 150, number4 = 200, number5 = 250;
+    list = createList();
+    add_to_list(&list, &number1);
+    add_to_list(&list, &number2);
+    add_to_list(&list, &number3);
+    add_to_list(&list, &number4);
+    add_to_list(&list, &number5);
+
+    assert(5 == list.length);
+    result = reverse(list);
+    assert(5 == result.length);
+    assert(&number5 == result.first -> element);
+    assert(&number4 == result.first -> next -> element);
+    assert(&number3 == result.first -> next -> next -> element);
+    assert(&number2 == result.first -> next -> next -> next -> element);
+    assert(&number1 == result.first -> next -> next -> next -> next -> element);
+    assert(&number1 == result.last -> element);
+
+    printf("test_reverse\t\tgives the reverse of the given list\n");
     passed_test++;
 }
 
@@ -225,5 +249,7 @@ int main(){
     test_deleteElementAt();
     test_asArray();
     test_filter();
+    test_reverse();
+
     return 0;
 }

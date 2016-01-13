@@ -3,8 +3,8 @@ typedef int (MatchFunc)(void *, void *);
 
 typedef struct node{
     void *element;
-    void *previous;
-    void *next;
+    struct node *previous;
+    struct node *next;
 }Node;
 
 typedef struct linkedList{
@@ -23,3 +23,4 @@ int indexOf(LinkedList, void *);
 void * deleteElementAt(LinkedList *, int);
 int asArray(LinkedList, void **, int maxElements);
 LinkedList filter(LinkedList, MatchFunc, void * );
+LinkedList reverse(LinkedList);

@@ -112,3 +112,13 @@ LinkedList filter(LinkedList list, MatchFunc match, void *hint){
     }
     return result;
 };
+
+LinkedList reverse(LinkedList list){
+    LinkedList result = createList();
+    Node *node = list.last;
+    for(int index = 0; index < list.length; index++){
+        add_to_list(&result, node -> element);
+        node = node -> previous;
+    }
+    return result;
+}
