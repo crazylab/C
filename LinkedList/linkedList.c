@@ -122,3 +122,12 @@ LinkedList reverse(LinkedList list){
     }
     return result;
 }
+
+LinkedList map(LinkedList list, ConvertFunc convert, void *hint){
+    Node *node = list.first;
+    for(int index = 0; index < list.length; index++){
+        convert(hint, node -> element, node -> element);
+        node = node -> next;
+    }
+    return list;
+}

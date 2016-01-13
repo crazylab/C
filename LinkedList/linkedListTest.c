@@ -238,6 +238,36 @@ void test_reverse(){
     passed_test++;
 }
 
+void subtract(void* hint, void* sourceItem, void *destinationItem){
+    int *subtractor = (int *)hint;
+    int *number2 = (int *)sourceItem;
+    int *dest_data = (int *)destinationItem;
+    int result = (*number2) - (*subtractor);
+    *dest_data = result;
+}
+
+void test_map(){
+    LinkedList list, result;
+    int number1 = 50, number2 = 100, number3 = 150, number4 = 200, number5 = 250;
+    list = createList();
+    add_to_list(&list, &number1);
+    add_to_list(&list, &number2);
+    add_to_list(&list, &number3);
+    add_to_list(&list, &number4);
+    add_to_list(&list, &number5);
+    assert(5 == list.length);
+
+    int hint = 50;
+    result = map(list, &subtract, &hint);
+    assert(5 == result.length);
+
+    assert(0 == *(int *)result.first -> element);
+    assert(200 == *(int *)result.last -> element);
+
+    printf("test_map\t\toperates over each element of the list\n");
+    passed_test++;
+}
+
 int main(){
     test_createList();
     test_add_to_list();
@@ -250,6 +280,7 @@ int main(){
     test_asArray();
     test_filter();
     test_reverse();
+    test_map();
 
     return 0;
 }
