@@ -155,6 +155,7 @@ void test_deleteElementAt(){
 
     assert(5 == list.length);
     assert(deleteElementAt(&list, 3) == &number4);
+    assert(getElementAt(list, 3) == &number5);
 
     printf("test_deleteElementAt\tdeletes the element at that list. Returns the data referenced by the node at that position.\n");
     passed_test++;
