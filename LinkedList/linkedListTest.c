@@ -161,6 +161,32 @@ void test_deleteElementAt(){
     passed_test++;
 }
 
+void test_asArray(){
+    LinkedList list;
+    int number1 = 50, number2 = 100, number3 = 150, number4 = 200, number5 = 250, number = 0;
+    list = createList();
+    int *arr[10], maxElements = 10;
+    void **arr_ptr = (void **)&arr[0];
+
+    add_to_list(&list, &number1);
+    add_to_list(&list, &number2);
+    add_to_list(&list, &number3);
+    add_to_list(&list, &number4);
+    add_to_list(&list, &number5);
+
+    assert(5 == list.length);
+    assert(5 == asArray(list, arr_ptr, maxElements));
+
+    assert(arr[0] == &number1);
+    assert(arr[1] == &number2);
+    assert(arr[2] == &number3);
+    assert(arr[3] == &number4);
+    assert(arr[4] == &number5);
+
+    printf("test_asArray\t\tpopulates an array with all the element in the list\n");
+    passed_test++;
+}
+
 int main(){
     test_createList();
     test_add_to_list();
@@ -170,6 +196,7 @@ int main(){
     test_getElementAt();
     test_indexOf();
     test_deleteElementAt();
+    test_asArray();
 
     return 0;
 }

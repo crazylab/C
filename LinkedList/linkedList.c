@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdLib.h>
+#include <string.h>
 #include "linkedList.h"
 
 void initializeList(LinkedList *list){
@@ -86,4 +87,16 @@ void * deleteElementAt(LinkedList *list, int position){
     previous_node -> next = node -> next;
     free(node);
     return deleted_element;
+}
+
+int asArray(LinkedList list, void **arr, int maxElements){
+    int index, length;
+    Node *node = list.first;
+    length = list.length < maxElements ? list.length : maxElements;
+    for(index = 0; index < length; index++){
+        *arr = node -> element;
+        arr++;
+        node = node -> next;
+    }
+    return length;
 }
