@@ -1,7 +1,7 @@
 typedef void (*ElementProcessor)(void *);
 typedef int (MatchFunc)(void *, void *);
 typedef void (ConvertFunc)(void *, void *, void *);
-// typedef void *(Reducer)(void *, void *, void *);
+typedef void *(Reducer)(void *, void *, void *);
 
 typedef struct node{
     void *element;
@@ -27,4 +27,4 @@ int asArray(LinkedList, void **, int maxElements);
 LinkedList filter(LinkedList, MatchFunc, void * );
 LinkedList reverse(LinkedList);
 LinkedList map(LinkedList, ConvertFunc, void * );
-// void * reduce(LinkedList, Reducer, void *hint, void *initialValue);
+void * reduce(LinkedList, Reducer, void *hint, void *initialValue);

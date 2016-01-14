@@ -150,15 +150,15 @@ LinkedList map(LinkedList list, ConvertFunc convert, void *hint){
     return list;
 }
 
-// void * reduce(LinkedList list, Reducer reduce, void *hint, void *initialValue){
-//     Node *node = list.first;
-//     void *previousItem = initialValue;
-//     void *currentItem = node -> element;
-//
-//     for(int index = 0; index < list.length; index++){
-//         previousItem = reduce(hint, previousItem, currentItem);
-//         node = node -> next ;
-//         currentItem = node -> element;
-//     }
-//     return previousItem;
-// }
+void * reduce(LinkedList list, Reducer reduce, void *hint, void *initialValue){
+    Node *node = list.first;
+    void *previousItem = initialValue;
+    void *currentItem;
+
+    for(int index = 0; index < list.length; index++){
+        currentItem = node -> element;
+        previousItem = reduce(hint, previousItem, currentItem);
+        node = node -> next ;
+    }
+    return previousItem;
+}
