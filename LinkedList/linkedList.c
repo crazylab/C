@@ -55,10 +55,12 @@ void forEach(LinkedList *list, ElementProcessor e){
 
 void * getElementAt(LinkedList list, int position){
     int index;
-    Node *node = list.first;
-    for(index = 0; index < position; index++){
+    Node *node;
+    if(position >= list.length || list.length == 0 || position < 0)
+        return NULL;
+    node = list.first;
+    for(index = 0; index < position; index++)
         node = node -> next;
-    }
     return node -> element;
 }
 
