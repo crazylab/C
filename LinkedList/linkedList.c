@@ -76,15 +76,30 @@ int indexOf(LinkedList list, void *element){
 void * deleteElementAt(LinkedList *list, int position){
     int index;
     void *deleted_element;
-    Node *node = list -> first;
+    Node *node;
+    Node *previous_node;
+    Node *next_node;
+    node = list -> first;
     for(index = 0; index < position; index++){
         node = node -> next;
     }
     deleted_element = node -> element;
-    Node *previous_node = (Node *)node -> previous;
-    Node *next_node = (Node *)node -> next;
-    next_node -> previous = node -> previous;
-    previous_node -> next = node -> next;
+    previous_node = (Node *)node -> previous;
+    next_node = (Node *)node -> next;
+
+    if(node == list -> first){
+        list -> first = next_node;
+        next_node -> previous = NULL;
+    }
+    else if(node == list -> last){
+        list -> last = previous_node;
+        previous_node -> next = NULL;
+    }
+    else{
+        previous_node -> next = node -> next;
+        next_node -> previous = node -> previous;
+    }
+    list -> length--;
     free(node);
     return deleted_element;
 }
@@ -125,9 +140,23 @@ LinkedList reverse(LinkedList list){
 
 LinkedList map(LinkedList list, ConvertFunc convert, void *hint){
     Node *node = list.first;
+    LinkedList result = createList();
     for(int index = 0; index < list.length; index++){
         convert(hint, node -> element, node -> element);
         node = node -> next;
     }
     return list;
 }
+
+// void * reduce(LinkedList list, Reducer reduce, void *hint, void *initialValue){
+//     Node *node = list.first;
+//     void *previousItem = initialValue;
+//     void *currentItem = node -> element;
+//
+//     for(int index = 0; index < list.length; index++){
+//         previousItem = reduce(hint, previousItem, currentItem);
+//         node = node -> next ;
+//         currentItem = node -> element;
+//     }
+//     return previousItem;
+// }

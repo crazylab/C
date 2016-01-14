@@ -157,6 +157,14 @@ void test_deleteElementAt(){
     assert(deleteElementAt(&list, 3) == &number4);
     assert(getElementAt(list, 3) == &number5);
 
+    assert(deleteElementAt(&list, 0) == &number1);
+    assert(getElementAt(list, 0) == &number2);
+    assert(list.first -> element == &number2);
+
+    assert(deleteElementAt(&list, 2) == &number5);
+    assert(list.last -> element == &number3);
+    // assert(getElementAt(list, 2) == NULL);
+
     printf("test_deleteElementAt\tdeletes the element at that list. Returns the data referenced by the node at that position.\n");
     passed_test++;
 }
@@ -268,6 +276,32 @@ void test_map(){
     passed_test++;
 }
 
+void* find_sum(void* hint, void* previousItem, void* item){
+    int *item_ptr = (int *)item;
+    int *previousItem_ptr = (int *)previousItem;
+    *previousItem_ptr = (*previousItem_ptr) + (*item_ptr);
+    return previousItem;
+}
+
+// void test_reduce(){
+//     LinkedList list;
+//     int number1 = 50, number2 = 100, number3 = 150, number4 = 200, number5 = 250;
+//     list = createList();
+//     add_to_list(&list, &number1);
+//     add_to_list(&list, &number2);
+//     add_to_list(&list, &number3);
+//     add_to_list(&list, &number4);
+//     add_to_list(&list, &number5);
+//     assert(5 == list.length);
+//
+//     int initial = 0;
+//     int *sum = (int *)reduce(list, &find_sum, NULL, &initial);
+//     assert(750 == *sum);
+//
+//     printf("test_reduce\t\treduces the list by considering each element in the list\n");
+//     passed_test++;
+// }
+
 int main(){
     test_createList();
     test_add_to_list();
@@ -281,6 +315,7 @@ int main(){
     test_filter();
     test_reverse();
     test_map();
+    // test_reduce();
 
     return 0;
 }
